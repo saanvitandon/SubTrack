@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SubTrack — Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="logo-mark">Sub<span>Track</span></div>
+    </div>
+    <nav class="nav">
+      <a class="nav-item active" href="index.html">
+        <span class="icon">◈</span>
+        <span>Dashboard</span>
+        <span class="nav-badge" id="sub-count">0</span>
+      </a>
+      <a class="nav-item" href="add.html">
+        <span class="icon">＋</span>
+        <span>Add Subscription</span>
+      </a>
+      <a class="nav-item" href="analytics.html">
+        <span class="icon">◎</span>
+        <span>Analytics</span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="logout-btn" id="logout-btn" title="Sign out">⏻ Sign out</button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="header">
+      <div class="header-left">
+        <h1>Dashboard</h1>
+        <p>Manage your active subscriptions</p>
+      </div>
+      <div class="header-right">
+        <div class="header-stats">
+          <div class="stat-pill">
+            <div class="stat-label">Monthly Spend</div>
+            <div class="stat-value" id="total-spend">₹0.00</div>
+          </div>
+          <div class="stat-pill accent2">
+            <div class="stat-label">Active Subscriptions</div>
+            <div class="stat-value" id="total-count">0</div>
+          </div>
+        </div>
+        <button class="theme-toggle" id="theme-btn" title="Toggle theme">☀︎</button>
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="page">
+        <div class="section-heading">
+          <h2>Active Subscriptions</h2>
+          <span id="dash-count-label">0 services</span>
+        </div>
+        <div class="cards-grid" id="cards-container">
+          <div class="empty-state">
+            <div class="big">∅</div>
+            <p>No subscriptions yet. Add one to get started.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="edit-overlay" class="edit-overlay" style="display:none;">
+  <div class="edit-modal">
+    <div class="edit-modal-header">
+      <div class="form-title">Edit Subscription</div>
+      <button id="edit-close-btn" class="edit-close-btn" title="Close">✕</button>
+    </div>
+    <div class="form-subtitle">Update the details below and save</div>
+    <form id="edit-form" novalidate>
+      <input type="hidden" id="edit-id" />
+      <div class="form-grid">
+        <div class="form-group full">
+          <label for="edit-name">Subscription Name</label>
+          <input id="edit-name" type="text" placeholder="e.g. Netflix, Spotify…" required />
+        </div>
+        <div class="form-group">
+          <label for="edit-cost">Cost (₹)</label>
+          <input id="edit-cost" type="number" placeholder="0" min="0" step="1" required />
+        </div>
+        <div class="form-group">
+          <label for="edit-cycle">Billing Cycle</label>
+          <div class="select-wrap">
+            <select id="edit-cycle">
+              <option value="monthly">Monthly</option>
+              <option value="yearly">Yearly</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group full">
+          <label>Category</label>
+          <div id="edit-cat-picker"></div>
+          <select id="edit-cat">
+            <option value="Streaming">Streaming</option>
+            <option value="Music">Music</option>
+            <option value="Software">Software</option>
+            <option value="Cloud">Cloud</option>
+            <option value="Gaming">Gaming</option>
+            <option value="News">News</option>
+            <option value="Finance">Finance</option>
+            <option value="Health">Health</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+      <button class="add-btn" type="submit">Save Changes</button>
+    </form>
+  </div>
+</div>
+
+<div id="toast"></div>
+<script src="auth.js"></script>
+<script src="script.js"></script>
+<script src="dashboard.js"></script>
+</body>
+</html>

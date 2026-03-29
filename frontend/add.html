@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SubTrack — Add Subscription</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="logo-mark">Sub<span>Track</span></div>
+    </div>
+    <nav class="nav">
+      <a class="nav-item" href="index.html">
+        <span class="icon">◈</span>
+        <span>Dashboard</span>
+        <span class="nav-badge" id="sub-count">0</span>
+      </a>
+      <a class="nav-item active" href="add.html">
+        <span class="icon">＋</span>
+        <span>Add Subscription</span>
+      </a>
+      <a class="nav-item" href="analytics.html">
+        <span class="icon">◎</span>
+        <span>Analytics</span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="logout-btn" id="logout-btn" title="Sign out">⏻ Sign out</button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="header">
+      <div class="header-left">
+        <h1>Add Subscription</h1>
+        <p>Track a new recurring payment</p>
+      </div>
+      <div class="header-right">
+        <div class="header-stats">
+          <div class="stat-pill">
+            <div class="stat-label">Monthly Spend</div>
+            <div class="stat-value" id="total-spend">₹0.00</div>
+          </div>
+          <div class="stat-pill accent2">
+            <div class="stat-label">Active Subscriptions</div>
+            <div class="stat-value" id="total-count">0</div>
+          </div>
+        </div>
+        <button class="theme-toggle" id="theme-btn" title="Toggle theme">☀︎</button>
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="page">
+        <div class="form-card">
+          <div class="form-title">New Subscription</div>
+          <div class="form-subtitle">Fill in the details below to start tracking</div>
+
+          <form id="sub-form" novalidate>
+            <div class="form-grid">
+
+              <div class="form-group full">
+                <label for="f-name">Subscription Name</label>
+                <input id="f-name" type="text" placeholder="e.g. Netflix, Spotify, AWS…" required />
+              </div>
+
+              <div class="form-group">
+                <label>Start Date</label>
+                <input type="text" id="f-date" placeholder="Select date">
+              </div>
+
+              <div class="form-group">
+                <label for="f-cost">Cost (₹)</label>
+                <input id="f-cost" type="number" placeholder="0" min="0" step="1" required />
+              </div>
+
+              <div class="form-group">
+                <label for="f-cycle">Billing Cycle</label>
+                <div class="select-wrap">
+                  <select id="f-cycle">
+                    <option value="monthly">Monthly</option>
+                    <option value="yearly">Yearly</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group full">
+                <label>Category</label>
+                <div id="f-cat-picker">
+                  <input type="hidden" id="f-cat">
+                </div>
+                <select id="f-cat">
+                  <option value="Streaming">Streaming</option>
+                  <option value="Music">Music</option>
+                  <option value="Software">Software</option>
+                  <option value="Cloud">Cloud</option>
+                  <option value="Gaming">Gaming</option>
+                  <option value="News">News</option>
+                  <option value="Finance">Finance</option>
+                  <option value="Health">Health</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+            </div>
+            <button class="add-btn" type="submit">Add Subscription</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+<script src="auth.js"></script>
+<script src="script.js"></script>
+<script src="add.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+</body>
+</html>

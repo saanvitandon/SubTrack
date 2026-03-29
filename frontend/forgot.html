@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SubTrack — Reset Password</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<button class="theme-toggle auth-theme-btn" id="theme-btn" title="Toggle theme">☀︎</button>
+
+<div class="auth-page">
+
+  <div class="auth-left">
+    <div class="auth-brand">
+      <div class="auth-logo">Sub<span>Track</span></div>
+      <div class="auth-tagline">Reset your password.</div>
+    </div>
+    <div class="auth-features">
+      <div class="auth-feature">
+        <span class="auth-feature-icon">✦</span>
+        <span>Enter your email and set a new password</span>
+      </div>
+      <div class="auth-feature">
+        <span class="auth-feature-icon">◈</span>
+        <span>Your data stays safe and untouched</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="auth-right">
+    <div class="auth-card">
+
+      <div id="step-1">
+        <div class="auth-card-header">
+          <h1 class="auth-title">Forgot password?</h1>
+          <p class="auth-subtitle">Enter your email to reset your password</p>
+        </div>
+        <form id="forgot-form" novalidate>
+          <div class="auth-group">
+            <label for="email">Email address</label>
+            <input id="email" type="email" placeholder="you@example.com" autocomplete="email" />
+          </div>
+          <button class="auth-btn" type="submit">Continue</button>
+        </form>
+      </div>
+
+      <div id="step-2" style="display:none;">
+        <div class="auth-card-header">
+          <h1 class="auth-title">Set new password</h1>
+          <p class="auth-subtitle" id="step2-sub">Enter a new password for your account</p>
+        </div>
+        <form id="reset-form" novalidate>
+          <div class="auth-group">
+            <label for="new-password">New password <span class="auth-hint">min. 6 characters</span></label>
+            <div class="auth-input-wrap">
+              <input id="new-password" type="password" placeholder="••••••••" autocomplete="new-password" />
+              <button type="button" class="auth-eye" id="toggle-pw">👁</button>
+            </div>
+          </div>
+          <div class="auth-group">
+            <label for="confirm-password">Confirm new password</label>
+            <div class="auth-input-wrap">
+              <input id="confirm-password" type="password" placeholder="••••••••" autocomplete="new-password" />
+              <button type="button" class="auth-eye" id="toggle-confirm">👁</button>
+            </div>
+          </div>
+          <button class="auth-btn" type="submit">Reset Password</button>
+        </form>
+      </div>
+
+      <div id="step-3" style="display:none; text-align:center; padding: 20px 0;">
+        <div style="font-size:48px; margin-bottom:16px;">✓</div>
+        <h1 class="auth-title">Password reset!</h1>
+        <p class="auth-subtitle" style="margin-bottom:32px;">Your password has been updated successfully.</p>
+        <a href="login.html" class="auth-btn" style="display:block; text-decoration:none; text-align:center;">Back to Sign In</a>
+      </div>
+
+      <p class="auth-switch" id="back-link">Remember it? <a href="login.html" class="auth-link">Sign in</a></p>
+
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+<script src="auth.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  initTheme();
+
+  var verifiedEmail = '';
+
+  function toggleVis(inputId) {
+    var el = document.getElementById(inputId);
+    el.type = el.type === 'password' ? 'text' : 'password';
+  }
+  document.getElementById('toggle-pw').addEventListener('click', function() { toggleVis('new-password'); });
+  document.getElementById('toggle-confirm').addEventListener('click', function() { toggleVis('confirm-password'); });
+
+  document.getElementById('forgot-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var email = document.getElementById('email').value.trim();
+
+    if (!email || !email.includes('@')) {
+      showAuthToast('Please enter a valid email address.', true);
+      return;
+    }
+
+    var user = findUser(email);
+    if (!user) {
+      showAuthToast('No account found with that email.', true);
+      return;
+    }
+
+    verifiedEmail = email;
+    document.getElementById('step2-sub').textContent = 'Setting new password for ' + email;
+    document.getElementById('step-1').style.display = 'none';
+    document.getElementById('step-2').style.display = 'block';
+  });
+
+  document.getElementById('reset-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var newPw  = document.getElementById('new-password').value;
+    var confPw = document.getElementById('confirm-password').value;
+
+    if (newPw !== confPw) {
+      showAuthToast('Passwords do not match.', true);
+      return;
+    }
+
+    var result = resetPassword(verifiedEmail, newPw);
+    if (!result.ok) {
+      showAuthToast(result.error, true);
+      return;
+    }
+
+    document.getElementById('step-2').style.display = 'none';
+    document.getElementById('step-3').style.display = 'block';
+    document.getElementById('back-link').style.display = 'none';
+  });
+});
+</script>
+</body>
+</html>
