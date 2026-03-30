@@ -20,8 +20,6 @@ The application has implemented a **full-stack system with authentication, datab
 - Secure password hashing using bcrypt
 - JWT-based authentication
 
----
-
 ### 📊 Subscription Management
 
 - Add new subscriptions
@@ -29,15 +27,11 @@ The application has implemented a **full-stack system with authentication, datab
 - Delete subscriptions
 - Store data securely in MongoDB
 
----
-
 ### 📈 Dashboard
 
 - View all active subscriptions
 - Monthly spending calculation
 - Subscription count overview
-
----
 
 ### 📉 Analytics
 
@@ -46,15 +40,11 @@ The application has implemented a **full-stack system with authentication, datab
 - Smart insights into user spending
 - Upcoming renewal reminders based on billing cycle
 
----
-
 ### ⏰ Smart Features
 
 - Automatic billing cycle handling (monthly/yearly)
 - Renewal date calculation
 - Upcoming & urgent reminders
-
----
 
 ### 🎨 UI/UX
 
