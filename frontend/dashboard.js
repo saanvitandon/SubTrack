@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
   initTheme();
 
-  // 🔥 FETCH FROM BACKEND
+  // FETCH FROM BACKEND
   async function fetchSubs() {
     const res = await fetch(`http://localhost:5000/api/subscriptions/${session.email}`);
     return await res.json();
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async function() {
   updateHeaderStats(subscriptions);
   renderCards();
 
-  // 🧾 RENDER CARDS
+  // RENDER CARDS
   function renderCards() {
     const container = document.getElementById('cards-container');
     const countLabel = document.getElementById('dash-count-label');

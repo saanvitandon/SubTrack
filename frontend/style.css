@@ -602,7 +602,7 @@ canvas {
   max-height: 300px;
 }
 
-/* 🔥 Reminder styling */
+/* Reminder styling */
 
 .reminder-list {
   list-style: none;
@@ -617,7 +617,7 @@ canvas {
   font-size: 13px;
 }
 
-/* 🔥 CUSTOM BULLET */
+/* CUSTOM BULLET */
 .reminder-list li::before {
   content: "";
   position: absolute;
@@ -629,7 +629,7 @@ canvas {
   background: var(--text); /* adapts to theme */
 }
 
-/* ☀️ LIGHT MODE (colored text) */
+/* LIGHT MODE (colored text) */
 body.light .reminder-list.urgent li {
   color: #000000;
   font-weight: 500;
@@ -639,7 +639,7 @@ body.light .reminder-list.upcoming li {
   color: #000000;
 }
 
-/* 🌙 DARK MODE (ALL WHITE TEXT) */
+/* DARK MODE (ALL WHITE TEXT) */
 body:not(.light) .reminder-list.urgent li,
 body:not(.light) .reminder-list.upcoming li {
   color: var(--text);
@@ -652,7 +652,7 @@ body:not(.light) .reminder-list.upcoming li {
   font-weight: 400;
 }
 
-/* 🔥 Flatpickr Dark Theme Override */
+/* Flatpickr Dark Theme Override */
 
 .flatpickr-calendar {
   background: var(--surface);
@@ -678,7 +678,7 @@ body:not(.light) .reminder-list.upcoming li {
   background: var(--surface);
 }
 
-/* 🔥 Fix Flatpickr for Dark Mode */
+/* Fix Flatpickr for Dark Mode */
 
 body:not(.light) .flatpickr-calendar {
   background: var(--surface);
@@ -700,18 +700,18 @@ body:not(.light) .flatpickr-current-month input {
   background: transparent;
 }
 
-/* 🔥 ARROWS FIX */
+/* ARROWS FIX */
 body:not(.light) .flatpickr-prev-month svg,
 body:not(.light) .flatpickr-next-month svg {
   fill: var(--text);
 }
 
-/* 🔥 WEEKDAYS */
+/* WEEKDAYS */
 body:not(.light) .flatpickr-weekday {
   color: var(--muted);
 }
 
-/* 🔥 DAYS */
+/* DAYS */
 body:not(.light) .flatpickr-day {
   color: var(--text);
 }

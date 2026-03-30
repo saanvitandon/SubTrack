@@ -1,0 +1,10 @@
+{
+	"folders": [
+		{
+			"path": "../../project"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "SubTrack"
+	}
+}

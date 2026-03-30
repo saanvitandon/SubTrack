@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Subscription = require("../models/Subscription");
 
-// ➕ ADD subscription
+// ADD subscription
 router.post("/", async (req, res) => {
   try {
     const { userEmail, name, cost, cycle, category } = req.body;
@@ -28,7 +28,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// ❌ DELETE subscription
+// DELETE subscription
 router.delete("/:id", async (req, res) => {
   try {
     await Subscription.findByIdAndDelete(req.params.id);

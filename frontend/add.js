@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     defaultDate: "today"
   });
 
-  // 🔥 FETCH SUBSCRIPTIONS (for stats + edit)
+  // FETCH SUBSCRIPTIONS (for stats + edit)
   async function fetchSubs() {
     const res = await fetch(`http://localhost:5000/api/subscriptions/${session.email}`);
     return await res.json();
@@ -28,10 +28,10 @@ document.addEventListener('DOMContentLoaded', async function() {
   const subscriptions = await fetchSubs();
   updateHeaderStats(subscriptions);
 
-  // 🔥 CATEGORY PICKER
+  // CATEGORY PICKER
   buildCatPicker('f-cat-picker', 'f-cat');
 
-  // 🔥 EDIT MODE PREFILL
+  // EDIT MODE PREFILL
   if (editId) {
     isEdit = true;
 
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
   }
 
-  // 🔥 FORM SUBMIT
+  // FORM SUBMIT
   document.getElementById('sub-form').addEventListener('submit', async function(e) {
     e.preventDefault();
 

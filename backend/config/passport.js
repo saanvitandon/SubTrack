@@ -11,9 +11,7 @@ passport.deserializeUser((obj, done) => {
   done(null, obj);
 });
 
-// =========================
-// 🔴 GOOGLE STRATEGY
-// =========================
+// GOOGLE AUTH
 
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
@@ -31,9 +29,7 @@ passport.use(new GoogleStrategy({
 }
 ));
 
-// =========================
-// ⚫ GITHUB STRATEGY
-// =========================
+// GITHUB AUTH
 
 passport.use(new GitHubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID,

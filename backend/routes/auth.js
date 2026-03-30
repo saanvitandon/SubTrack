@@ -1,7 +1,3 @@
-/* ============================================================
-   Auth Routes - Register, Login, Reset Password
-   ============================================================ */
-
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -9,12 +5,11 @@ const User = require('../models/User');
 
 const router = express.Router();
 
-// POST /api/auth/register
+/* ================= REGISTER ================= */
 router.post('/register', async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
-    // Validate
     if (!username || username.trim().length < 2) {
       return res.status(400).json({ error: 'Username must be at least 2 characters.' });
     }
@@ -25,24 +20,21 @@ router.post('/register', async (req, res) => {
       return res.status(400).json({ error: 'Password must be at least 6 characters.' });
     }
 
-    // Check if email exists
     const existing = await User.findOne({ email: email.toLowerCase() });
     if (existing) {
       return res.status(400).json({ error: 'An account with this email already exists.' });
     }
 
-    // Hash password
     const passwordHash = await bcrypt.hash(password, 10);
 
-    // Create user
     const user = new User({
       username: username.trim(),
       email: email.toLowerCase().trim(),
       passwordHash
     });
+
     await user.save();
 
-    // Generate token
     const token = jwt.sign(
       { userId: user._id, email: user.email },
       process.env.JWT_SECRET,
@@ -61,7 +53,7 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// POST /api/auth/login
+/* ================= LOGIN ================= */
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -98,7 +90,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// POST /api/auth/reset-password
+/* ================= RESET PASSWORD ================= */
 router.post('/reset-password', async (req, res) => {
   try {
     const { email, newPassword } = req.body;
@@ -117,6 +109,7 @@ router.post('/reset-password', async (req, res) => {
 
     const newHash = await bcrypt.hash(newPassword, 10);
     user.passwordHash = newHash;
+
     await user.save();
 
     res.json({ message: 'Password reset successful' });

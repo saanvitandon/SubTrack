@@ -8,15 +8,10 @@ const passport = require("passport");
 
 const app = express();
 
-// Debug (KEEP TEMP)
-console.log("Loaded MONGO_URI:", process.env.MONGO_URI);
-
-// =========================
-// 🔥 MIDDLEWARE
-// =========================
+// MIDDLEWARE //
 
 app.use(cors({
-  origin: "http://127.0.0.1:5500", // adjust if needed
+  origin: ["http://127.0.0.1:5500", "http://localhost:5500"],
   credentials: true
 }));
 
@@ -31,15 +26,11 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// =========================
-// 🔥 PASSPORT CONFIG
-// =========================
+// PASSPORT CONFIG //
 
 require("./config/passport");
 
-// =========================
-// 🔥 ROUTES (EXISTING)
-// =========================
+// ROUTES //
 
 const authRoutes = require("./routes/auth");
 const subscriptionRoutes = require("./routes/subscriptions");
@@ -47,9 +38,7 @@ const subscriptionRoutes = require("./routes/subscriptions");
 app.use("/api/auth", authRoutes);
 app.use("/api/subscriptions", subscriptionRoutes);
 
-// =========================
-// 🔥 OAUTH ROUTES
-// =========================
+// OAUTH ROUTES //
 
 // GOOGLE
 app.get("/api/auth/google",
@@ -57,14 +46,14 @@ app.get("/api/auth/google",
 );
 
 app.get("/api/auth/google/callback",
-  passport.authenticate("google", { failureRedirect: "/" }),
+  passport.authenticate("google", { failureRedirect: "/api/auth/login" }),
   (req, res) => {
-    // send user to frontend
 const user = req.user;
 
 res.redirect(
   `http://127.0.0.1:5500/frontend/index.html?email=${encodeURIComponent(user.email)}&username=${encodeURIComponent(user.username)}`
-);  }
+);
+  }
 );
 
 // GITHUB
@@ -73,18 +62,17 @@ app.get("/api/auth/github",
 );
 
 app.get("/api/auth/github/callback",
-  passport.authenticate("github", { failureRedirect: "/" }),
+  passport.authenticate("github", { failureRedirect: "/api/auth/login" }),
   (req, res) => {
 const user = req.user;
 
 res.redirect(
   `http://127.0.0.1:5500/frontend/index.html?email=${encodeURIComponent(user.email)}&username=${encodeURIComponent(user.username)}`
-);  }
+);
+  }
 );
 
-// =========================
-// 🔥 ROOT
-// =========================
+// ROOT //
 
 app.get("/", (req, res) => {
   res.json({
@@ -94,22 +82,23 @@ app.get("/", (req, res) => {
   });
 });
 
-// =========================
-// 🔥 DB CONNECTION
-// =========================
+// DB CONNECTION //
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-    console.log("SubTrack API running on port 5000");
-    console.log("http://localhost:5000");
-    console.log("Database: MongoDB Atlas");
+    console.log("✅ SubTrack API running on port 5000");
+    console.log("👉 http://localhost:5000");
+    console.log("📦 Database connected (MongoDB Atlas)");
     console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
   })
-  .catch(err => console.log("❌ MongoDB connection error:", err));
+  .catch(err => {
+    console.error("❌ MongoDB connection error:", err);
+    process.exit(1);
+  });
 
-// =========================
-// 🔥 START SERVER
-// =========================
+// START SERVER //
 
-app.listen(5000, () => {});
+app.listen(5000, () => {
+  console.log("🚀 Server started on port 5000");
+});

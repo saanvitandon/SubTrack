@@ -29,7 +29,6 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
-// Static methods for easy use
 userSchema.statics.sanitize = function(user) {
   if (!user) return null;
   const obj = user.toObject ? user.toObject() : user;

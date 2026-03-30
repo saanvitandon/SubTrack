@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../../wp_practice"
+		},
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "SubTrack"
+	}
+}

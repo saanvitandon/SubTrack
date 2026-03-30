@@ -166,7 +166,7 @@ document.getElementById('github-btn').addEventListener('click', function() {
   const data = await res.json();
 
   if (!res.ok) {
-    showAuthToast(data.message || "Signup failed", true);
+    showAuthToast(data.error || data.message || "Signup failed", true);
     return;
   }
 

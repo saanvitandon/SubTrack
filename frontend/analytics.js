@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
   initTheme();
 
-  // 🔥 FETCH FROM BACKEND
+  // FETCH FROM BACKEND
   async function fetchSubs() {
     const res = await fetch(`http://localhost:5000/api/subscriptions/${session.email}`);
     return await res.json();
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     var totalM = calculateTotal(subscriptions);
 
-    // 🟣 CATEGORY BREAKDOWN
+    // CATEGORY BREAKDOWN
     var byCategory = {};
 
     subscriptions.forEach(s => {
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         '</div>';
     });
 
-    // 🔵 PER PLAN CONTRIBUTION
+    // PER PLAN CONTRIBUTION
     var planBars = '';
 
     subscriptions.forEach(sub => {
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         '</div>';
     });
 
-    // 🔴 SMART REMINDERS
+    // SMART REMINDERS
     function getNextDate(startDate, cycle) {
       const start = new Date(startDate);
       const now = new Date();
@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     var remindersHTML = renderReminders(subscriptions);
 
-    // 🧾 FINAL RENDER
+    // FINAL RENDER
     container.innerHTML =
       '<div class="analytics-card">' +
         '<h3>Spend by Category</h3>' +

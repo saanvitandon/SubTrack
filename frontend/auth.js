@@ -169,3 +169,17 @@ function showAuthToast(msg, isError) {
   clearTimeout(_authToastTimer);
   _authToastTimer = setTimeout(function() { el.classList.remove('show'); }, 3000);
 }
+
+(function handleOAuthLogin() {
+  const params = new URLSearchParams(window.location.search);
+
+  const email = params.get("email");
+  const username = params.get("username");
+
+  if (email && username) {
+    setSession({ email, username });
+
+    // clean URL (important)
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
+})();
